@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="c++Primer plus 第七章第八章1.函数原型函数原型是一条语句，在使用函数之前，需要先声明函数原型，如： 1double cube(double x); 函数原型不要求提供变量名，又类型列表就够了。所以也可以这么表示： 1double cube(double);">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" cpp-第七章第八章">
+<meta property="og:url" content="http://yoursite.com/2020/07/24/cpp-%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%AC%AC%E5%85%AB%E7%AB%A0/index.html">
+<meta property="og:site_name" content="ZERO">
+<meta property="og:description" content="c++Primer plus 第七章第八章1.函数原型函数原型是一条语句，在使用函数之前，需要先声明函数原型，如： 1double cube(double x); 函数原型不要求提供变量名，又类型列表就够了。所以也可以这么表示： 1double cube(double);">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-24T07:57:21.000Z">
+<meta property="article:modified_time" content="2020-08-10T03:01:02.615Z">
+<meta property="article:author" content="zero">
+<meta property="article:tag" content="c++">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/24/cpp-%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%AC%AC%E5%85%AB%E7%AB%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> cpp-第七章第八章 | ZERO</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ZERO</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/24/cpp-%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%AC%AC%E5%85%AB%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.gif">
+      <meta itemprop="name" content="zero">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZERO">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+           cpp-第七章第八章
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-24 15:57:21" itemprop="dateCreated datePublished" datetime="2020-07-24T15:57:21+08:00">2020-07-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-10 11:01:02" itemprop="dateModified" datetime="2020-08-10T11:01:02+08:00">2020-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/c-Primer-Plus/" itemprop="url" rel="index"><span itemprop="name">c++Primer Plus</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="c-Primer-plus-第七章第八章"><a href="#c-Primer-plus-第七章第八章" class="headerlink" title="c++Primer plus 第七章第八章"></a>c++Primer plus 第七章第八章</h2><h3 id="1-函数原型"><a href="#1-函数原型" class="headerlink" title="1.函数原型"></a>1.函数原型</h3><p>函数原型是一条语句，在使用函数之前，需要先声明函数原型，如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">cube</span><span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>函数原型不要求提供变量名，又类型列表就够了。所以也可以这么表示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">cube</span><span class="params">(<span class="keyword">double</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="2-函数与二维数组"><a href="#2-函数与二维数组" class="headerlink" title="2.函数与二维数组"></a>2.函数与二维数组</h3><p>假设有下列代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> data[<span class="number">3</span>][<span class="number">4</span>]=&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;,&#123;<span class="number">9</span>,<span class="number">7</span>,<span class="number">6</span>,<span class="number">5</span>&#125;,&#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">int</span> total=sum(data,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<p>如何声明sum 的原型呢？Data是一个数组名，该数组有三个元素，第一个元素本身是一个数组，有4个int值组成。因此Data的类型是指向4个int组成的数组的指针。因此正确的原型如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> (*ar2)[<span class="number">4</span>],<span class="keyword">int</span> size)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> ar2[][<span class="number">4</span>],<span class="keyword">int</span> size)</span></span>;  <span class="comment">//也可以像这样声明 可读性强</span></span><br></pre></td></tr></table></figure>
+<p>括号必不可少，如果没有括号，则是声明一个有4个指向int的指针组成的数组。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *ar2[<span class="number">4</span>]; <span class="comment">//一个有4个指向int的指针组成的数组</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-函数指针-基础"><a href="#3-函数指针-基础" class="headerlink" title="3.函数指针(基础)"></a>3.函数指针(基础)</h3><p>与数据项相似，函数也有地址。函数的地址是存储在其机器语言代码的内存的开始地址。通常，这些地址对于用户而言，及不重要也没有什么用处，但是对于程序而言，却很有用。例如，可以编写将另一个函数的地址作为参数的函数。这样第一个函数能够找到第二个函数，并与性能它。与直接调用另一个函数相比，这种方法很笨拙，但它允许在不同的时间专递不同的函数的地址，这意味这可以在不同时间使用不同的函数。  </p>
+<h4 id="3-1-获取函数的地址"><a href="#3-1-获取函数的地址" class="headerlink" title="3.1 获取函数的地址"></a>3.1 获取函数的地址</h4><p>获取函数的地址很简单，只要使用函数名即可，也就是说，如果think()是一个函数，则<code>think</code>就是该函数的地址</p>
+<h4 id="3-2-声明函数指针"><a href="#3-2-声明函数指针" class="headerlink" title="3.2 声明函数指针"></a>3.2 声明函数指针</h4><p>声明指向某种数据类型的指针时，必须指定指针指向的类型。同样，声明指向函数的指针时，也必须指定指针指向的函数类型。这意味着应该指定函数的返回类型以及函数的特征标(参数列表)。也就是说，声明应像函数原型那样指出有关函数的信息。声明方式如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">pam</span><span class="params">(<span class="keyword">int</span> )</span></span>; <span class="comment">//函数原型的声明方式</span></span><br><span class="line"><span class="keyword">double</span> (*pa)(<span class="keyword">int</span> ) <span class="comment">//正确的函数指针的声明方式。</span></span><br><span class="line">pa=pam;  <span class="comment">//正确的声明指针后，可以将地址赋给它</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-3-使用指针来调用函数"><a href="#3-3-使用指针来调用函数" class="headerlink" title="3.3 使用指针来调用函数"></a>3.3 使用指针来调用函数</h4><p><code>(*pf)</code>扮演的角色和函数名相同，因此可以如下调用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> x=(*pf)(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<p>实际上，c++也允许想使用函数名那样使用pf：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> x=pf(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="4-内联函数"><a href="#4-内联函数" class="headerlink" title="4.内联函数"></a>4.内联函数</h3><p>内敛函数时c++为底稿程序运行速度所作的一项改进，常规函数与内联函数之间的主要区别不在于编写方式，而在于c++编译器如何将它们组合到程序中。对于内敛函数，程序无需跳到另一个位置执行函数代码。而是使用相应的函数代码替换函数调用。因此，内联函数的运行速度比常规函数稍快，但代价时占用更多内存。如果程序在10个不同的地方调用同一个内联函数，则该程序将包含该函数代码的10个副本。<br>内联函数使用<code>inline</code>关键字声明，如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">double</span> <span class="title">square</span><span class="params">(<span class="keyword">double</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>应有选择的使用内联函数，当代码执行时间很短，比处理函数调用机制的时间还短或相近时，使用内联函数能有不错的效果。  </p>
+<h3 id="5-引用变量"><a href="#5-引用变量" class="headerlink" title="5.引用变量"></a>5.引用变量</h3><p>c++为&amp;符号赋予了另外一个含义，将其用来声明应用。例如，要将rodents作为rats的别名，可以这样做：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> rats;</span><br><span class="line"><span class="keyword">int</span> &amp;rodents=rats;</span><br></pre></td></tr></table></figure>
+<p>上述引用声明允许将rats和rodents呼唤，它们只想相同的值和单元。<br>引用更接近const指针，必须在创建时进行初始化，一旦与某个变量关联起来，就将一直效忠于它。<br>引用常被用做函数参数，通过引用传递，可以增加传递的速度，也可以保留对于传递参数的修改。  </p>
+<h3 id="6-默认参数"><a href="#6-默认参数" class="headerlink" title="6.默认参数"></a>6.默认参数</h3><p>c++在声明函数时，可以设置默认参数，直接在声明原型时定义默认参数，默认参数只需声明一次。如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">left</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *str,<span class="keyword">int</span> n=<span class="number">1</span>)</span></span>;<span class="comment">//原型声明</span></span><br><span class="line">left(str)   <span class="comment">//如果像这样调用函数，则第二个参数默认为1。</span></span><br></pre></td></tr></table></figure>
+<p>对于带参数列表的函数，必须从右向左添加默认值，也就是说，要为某个参数设置默认值，则必须为它右边的所有参数提供默认值。</p>
+<h3 id="7-函数重载和函数模板"><a href="#7-函数重载和函数模板" class="headerlink" title="7.函数重载和函数模板"></a>7.函数重载和函数模板</h3><p>内容太多，且复杂，先留着，以后专门写一篇吧。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat.JPG" alt="zero 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.JPG" alt="zero 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/c/" rel="tag"><i class="fa fa-tag"></i> c++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/27/cpp-%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%AC%AC%E5%85%AD%E7%AB%A0/" rel="prev" title="cpp-第五章第六章">
+      <i class="fa fa-chevron-left"></i> cpp-第五章第六章
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/31/cpp-%E7%AC%AC%E4%B9%9D%E7%AB%A0%E7%AC%AC%E5%8D%81%E7%AB%A0/" rel="next" title="第九章第十章">
+      第九章第十章 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#c-Primer-plus-%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%AC%AC%E5%85%AB%E7%AB%A0"><span class="nav-number">1.</span> <span class="nav-text">c++Primer plus 第七章第八章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1.函数原型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%87%BD%E6%95%B0%E4%B8%8E%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">2.函数与二维数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.3.</span> <span class="nav-text">3.函数指针(基础)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E8%8E%B7%E5%8F%96%E5%87%BD%E6%95%B0%E7%9A%84%E5%9C%B0%E5%9D%80"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 获取函数的地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E5%A3%B0%E6%98%8E%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 声明函数指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88%E6%9D%A5%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 使用指针来调用函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">4.内联函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%BC%95%E7%94%A8%E5%8F%98%E9%87%8F"><span class="nav-number">1.5.</span> <span class="nav-text">5.引用变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">6.默认参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E5%92%8C%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.7.</span> <span class="nav-text">7.函数重载和函数模板</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zero"
+      src="/images/1.gif">
+  <p class="site-author-name" itemprop="name">zero</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zeroseven-hash" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zeroseven-hash" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵卿锋</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
