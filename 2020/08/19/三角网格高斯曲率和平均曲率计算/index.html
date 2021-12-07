@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/16.ico">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/08/19/qtAy3lnUkcbzTMs.png">
 <meta property="og:image" content="https://i.loli.net/2020/08/19/E8aO2JrZBzbkhQl.png">
 <meta property="article:published_time" content="2020-08-19T03:01:13.000Z">
-<meta property="article:modified_time" content="2020-08-27T06:54:34.768Z">
+<meta property="article:modified_time" content="2020-08-27T06:54:34.000Z">
 <meta property="article:author" content="zero">
 <meta property="article:tag" content="mesh">
 <meta name="twitter:card" content="summary">
@@ -257,7 +257,7 @@
 
       
         <h1 id="三角网格中高斯曲率和平均曲率的计算"><a href="#三角网格中高斯曲率和平均曲率的计算" class="headerlink" title="三角网格中高斯曲率和平均曲率的计算"></a>三角网格中高斯曲率和平均曲率的计算</h1><p>数字几何处理作业作业二，使用的是傅孝明老师的框架：<a target="_blank" rel="noopener" href="http://staff.ustc.edu.cn/~fuxm/code/index.html">作业框架</a></p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="1-拉普拉斯算子"><a href="#1-拉普拉斯算子" class="headerlink" title="1.拉普拉斯算子"></a>1.拉普拉斯算子</h2><p>对于三角形网格上离散点，顶点<code>Vi</code>,其相邻点为j，拉普拉斯算子的公式如下：<br><img src="https://i.loli.net/2020/08/19/KuqGna1YxjsO3ZN.png" alt="6V_5L1VB__GSS5_RIIN_IND.png"></p>
 <h3 id="1-1-Uniform-Laplacian"><a href="#1-1-Uniform-Laplacian" class="headerlink" title="1.1 Uniform Laplacian"></a>1.1 Uniform Laplacian</h3><p>ωij如果为1或是1/Ni，Ni表示顶点i的度，这种方式为Uniform Laplacian，这种不考虑顶点的几何结构。</p>
 <h3 id="1-2-cotangent-Formula"><a href="#1-2-cotangent-Formula" class="headerlink" title="1.2 cotangent Formula"></a>1.2 cotangent Formula</h3><p>这种方法考虑的顶点的连接关系，因此比较常用到，计算平均曲率也需要用到。其公式为：<br><img src="https://i.loli.net/2020/08/19/KhzBYjQsV6tHPcr.png" alt="X8ZCNGW6XT_KJIHAGXA_OZI.png"><br><img src="https://i.loli.net/2020/08/19/CfTtkn3VDIhjJiS.png" alt="JKM_245~99YXUE13@QV8G@D.png"><br><code>Ai</code>为图中蓝色区域面积，此蓝色区域被称为local averaging region，用来算离散顶点上一些微分量，通过在此区域内积分在除以总面积来得到。  </p>

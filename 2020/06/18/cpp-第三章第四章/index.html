@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/16.ico">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="c++Primer plus 第三章第四章简单记录第三章和第四章一些知识点。   1.const限定符const限定符可以用来指定常量，通常格式为 1const int maxsize&#x3D;15；    &#x2F;&#x2F;maxsize代表15； 相对于#define 的定义，在c++中更加推荐const限定符的方式。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-18T12:57:51.000Z">
-<meta property="article:modified_time" content="2020-08-10T03:01:08.648Z">
+<meta property="article:modified_time" content="2020-08-10T03:01:08.000Z">
 <meta property="article:author" content="zero">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
@@ -250,13 +250,14 @@
 <h3 id="1-const限定符"><a href="#1-const限定符" class="headerlink" title="1.const限定符"></a>1.const限定符</h3><p>const限定符可以用来指定常量，通常格式为</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxsize=<span class="number">15</span>；    <span class="comment">//maxsize代表15；</span></span><br></pre></td></tr></table></figure>
 <p>相对于#define 的定义，在c++中更加推荐const限定符的方式。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="2-浮点数"><a href="#2-浮点数" class="headerlink" title="2.浮点数"></a>2.浮点数</h3><p>c++中提供的浮点数类型主要有float、double、long double。同时小数也有两种表达表示，如0.24还可以表示为2.4E-1，即E表示法。在默认情况下，8.24和2.4E8这样的浮点数都属于double类型，如果希望常量为float类型，请使用f或F的后缀，对于long double类型，可以使用l或L（推荐使用容易区分）的后缀。</p>
 <h3 id="3-类型转换"><a href="#3-类型转换" class="headerlink" title="3.类型转换"></a>3.类型转换</h3><p>c++中表达式的转换一般会被转换成较大的类型。<br>c++强制类型转换有以下两种形式：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span>(thron);   <span class="comment">//c语言风格</span></span><br><span class="line">(<span class="keyword">long</span>)thron;   <span class="comment">//c++风格</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in"><span class="keyword">long</span></span>(thron);   <span class="comment">//c语言风格</span></span><br><span class="line">(<span class="keyword">long</span>)thron;   <span class="comment">//c++风格</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="4-string类"><a href="#4-string类" class="headerlink" title="4.string类"></a>4.string类</h3><p>要使用string关键字，需要添加头文件<string>。cin和cout都可以识别string对象并且输入，如果要读取的string对象为一行，则用如下方式：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str;</span><br><span class="line">getline(<span class="built_in">cin</span>,str);  <span class="comment">//char数组使用getline（char）或cin.getline(char,20);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string str;</span><br><span class="line"><span class="built_in">getline</span>(cin,str);  <span class="comment">//char数组使用getline（char）或cin.getline(char,20);</span></span><br></pre></td></tr></table></figure>
 <p>使用string类可以使得操作字符串更加简单，安全。<br>在老式头文件<cstring>中还有许多对字符串进行操作的函数，如strcpy（char1，char2），可以将char2数组的东西拷贝到char1数组中。<br>还有strcat（char1,char2），可以将字符串char2和char1合并，char2在后面。</p>
 <h3 id="5-读取字符串"><a href="#5-读取字符串" class="headerlink" title="5.读取字符串"></a>5.读取字符串</h3><p>c++中一般处理字符串由iostream类中的cin方法。一般用cin只能读取一个单词，碰到空格和换行符号都会结束读取。因此想要读取一行需要用到getline（）和get（）方法。<br>getline（）方法能直接读取一行字符串，并将最后的换行符读取，并替换成’\0’放入字符数组。也就是说使用getline（）方法读取，输入流中最后不会剩下换行符。<br>cin.getline()方法也会将换行符读取并且替换成’\0’，在使用cin后接招使用getline()时，需要使用cin.get()读取留下来的换行符.<br>get（）也能读取一行，但是不会读取最后的换行符，所以有时候需要再加一个cin.get()或是getchar()方法读取留下来的换行符。</p>
 <h3 id="6-结构体和共用体"><a href="#6-结构体和共用体" class="headerlink" title="6. 结构体和共用体"></a>6. 结构体和共用体</h3><p>结构体可以在定义的时候就初始化如：</p>
@@ -270,9 +271,9 @@
 <p>&ensp;&ensp;静态存储时整个程序执行期间都存在的存储方式。使变量变成静态的方式有两种：一种是在函数外面定义它；另一种方式是使用关键字static。  </p>
 <p>&ensp;&ensp;动态存储主要是使用new和delete关键字，它们管理了一个内存池，这在c++中被称为自由存储空间或堆。该内存池同用于静态变量和自动变量的内存是分开的。</p>
 <h3 id="8-数组的替代品array类和vector类"><a href="#8-数组的替代品array类和vector类" class="headerlink" title="8.数组的替代品array类和vector类"></a>8.数组的替代品array类和vector类</h3><p>此处不详细介绍，模板类vector就是类似于动态数组，不限长度。头文件为<vector>，通常用如下方式声明:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="keyword">int</span>&gt; a;</span><br></pre></td></tr></table></figure>
 <p>array类与数组基本一样，在声明时也得声明长度，不过相对于数组来说，其更加安全，其头文件为<array>，声明方式如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">array</span>&lt;<span class="keyword">int</span>,20&gt; a;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array&lt;<span class="keyword">int</span>,20&gt; a;</span><br></pre></td></tr></table></figure>
     </div>
 
     

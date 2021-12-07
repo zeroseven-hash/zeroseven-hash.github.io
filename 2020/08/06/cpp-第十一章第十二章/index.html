@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/16.ico">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="c++Primer plus 第十一章第十二章1.运算符重载运算符是一种形式的c++多态，在类中重载运算符，以+为例： 1Time operator+(const Time&amp;t)const;  &#x2F;&#x2F;在Time.h头文件中 如此声明后，对Time类型使用+，如a+b,则会转换为a.operator+(b);其他运算发相似。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-06T05:18:01.000Z">
-<meta property="article:modified_time" content="2020-08-10T03:00:37.798Z">
+<meta property="article:modified_time" content="2020-08-10T03:00:37.000Z">
 <meta property="article:author" content="zero">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
@@ -249,12 +249,12 @@
         <h2 id="c-Primer-plus-第十一章第十二章"><a href="#c-Primer-plus-第十一章第十二章" class="headerlink" title="c++Primer plus 第十一章第十二章"></a>c++Primer plus 第十一章第十二章</h2><h3 id="1-运算符重载"><a href="#1-运算符重载" class="headerlink" title="1.运算符重载"></a>1.运算符重载</h3><p>运算符是一种形式的c++多态，在类中重载运算符，以<code>+</code>为例：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time <span class="keyword">operator</span>+(<span class="keyword">const</span> Time&amp;t)<span class="keyword">const</span>;  <span class="comment">//在Time.h头文件中</span></span><br></pre></td></tr></table></figure>
 <p>如此声明后，对Time类型使用+，如a+b,则会转换为a.operator+(b);其他运算发相似。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h3 id="2-友元"><a href="#2-友元" class="headerlink" title="2.友元"></a>2.友元</h3><p>在类中定义友元函数，友元函数并非是类的成员函数，但是也可以访问类私有的数据成员。常常用于重载运算符。<br>友元函数定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> Time <span class="keyword">operator</span>*(<span class="keyword">double</span> n,<span class="keyword">const</span> Time &amp;a)&#123;</span><br><span class="line">    <span class="keyword">return</span> a*n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>要注意，友元函数非类的成员函数，因此在源文件中实现方法是，不需要在方法名前加类名和限定符。<br>重载运算符可以使用友元函数，也可以使用成员函数，自己选择合适的方法。但是某些情况下，两个方式都要用到。</p>
 <h3 id="3-类的类型转换"><a href="#3-类的类型转换" class="headerlink" title="3.类的类型转换"></a>3.类的类型转换</h3><p>如果一个类的构造函数如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stone(<span class="keyword">double</span> ln);  <span class="comment">//只有一个参数  </span></span><br><span class="line"><span class="function">Stone <span class="title">Cate</span><span class="params">(<span class="number">10</span>)</span></span>;  <span class="comment">//有效</span></span><br><span class="line">Stone cate;</span><br><span class="line">cate=<span class="number">10</span>;    <span class="comment">//有效</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Stone</span>(<span class="keyword">double</span> ln);  <span class="comment">//只有一个参数  </span></span><br><span class="line"><span class="function">Stone <span class="title">Cate</span><span class="params">(<span class="number">10</span>)</span></span>;  <span class="comment">//有效</span></span><br><span class="line">Stone cate;</span><br><span class="line">cate=<span class="number">10</span>;    <span class="comment">//有效</span></span><br></pre></td></tr></table></figure>
 <p>此构造函数只有一个参数，那么上面的情况成为隐式转换，但只针对于一项参数的构造函数。如果您不想要这种特性，可以使用关键字<code>explicit</code></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">Stone</span><span class="params">(<span class="keyword">double</span> ln)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>这样就不会隐式转换。</p>
@@ -267,7 +267,7 @@
 <li>转换函数不能有参数。</li>
 </ol>
 <h3 id="4-动态内存和类"><a href="#4-动态内存和类" class="headerlink" title="4.动态内存和类"></a>4.动态内存和类</h3><p>如果类的数据成员中有动态分配的成员。那么必须要为其提供复制成员函数，和赋值函数。并且在析构函数中释放其申请的内存：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Stack(<span class="keyword">const</span> Stcak&amp;s);<span class="comment">//复制函数</span></span><br><span class="line">Stack &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Stack &amp;s); <span class="comment">//赋值函数</span></span><br><span class="line">Stack s1,s2;</span><br><span class="line">s1=s2 <span class="comment">//会调用赋值函数。</span></span><br><span class="line">Stack s1=s2 <span class="comment">//调用复制函数</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Stack</span>(<span class="keyword">const</span> Stcak&amp;s);<span class="comment">//复制函数</span></span><br><span class="line">Stack &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> Stack &amp;s); <span class="comment">//赋值函数</span></span><br><span class="line">Stack s1,s2;</span><br><span class="line">s1=s2 <span class="comment">//会调用赋值函数。</span></span><br><span class="line">Stack s1=s2 <span class="comment">//调用复制函数</span></span><br></pre></td></tr></table></figure>
 <p>除了上述情况，在将类用作参数或者返回值时，如果不调用&amp;符号，那么编译器会创建临时变量，并将类复制到临时变量上，所以这两种情况也会调用复制函数。<br>综上所述，在有动态分配内存的成员时，必须自定义这两个函数，进行深度复制，因为编译器默认构造的函数无法完成复制动态分配内存的成员的任务。  </p>
 <h3 id="5-有关返回对象的说明"><a href="#5-有关返回对象的说明" class="headerlink" title="5.有关返回对象的说明"></a>5.有关返回对象的说明</h3><p>这部分看书449页自己复习吧。</p>
 <h3 id="构造函数使用new的类"><a href="#构造函数使用new的类" class="headerlink" title="构造函数使用new的类"></a>构造函数使用new的类</h3><p>上面说了使用动态分配内存的类需要特殊处理，这里细说一下：</p>

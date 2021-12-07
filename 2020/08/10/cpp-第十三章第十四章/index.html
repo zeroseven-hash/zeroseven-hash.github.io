@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/16.ico">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="c++Primer plus 第十三章第十四章">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-10T02:52:27.000Z">
-<meta property="article:modified_time" content="2020-08-10T03:48:12.758Z">
+<meta property="article:modified_time" content="2020-08-10T03:48:12.000Z">
 <meta property="article:author" content="zero">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
@@ -240,7 +240,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="c-Primer-plus-第十三章第十四章"><a href="#c-Primer-plus-第十三章第十四章" class="headerlink" title="c++Primer plus 第十三章第十四章"></a>c++Primer plus 第十三章第十四章</h2><a id="more"></a>
+        <h2 id="c-Primer-plus-第十三章第十四章"><a href="#c-Primer-plus-第十三章第十四章" class="headerlink" title="c++Primer plus 第十三章第十四章"></a>c++Primer plus 第十三章第十四章</h2><span id="more"></span>
 <h3 id="公有继承的考虑因素"><a href="#公有继承的考虑因素" class="headerlink" title="公有继承的考虑因素"></a>公有继承的考虑因素</h3><h4 id="1-is-a关系"><a href="#1-is-a关系" class="headerlink" title="1. is-a关系"></a>1. is-a关系</h4><p>要遵循is-a关系，如果派生类不是一种特殊的基类，则不要使用公有派生，在某种情况下，最好的方法可能是创建包含纯虚函数的抽象数据类，并从它派生出类。</p>
 <h4 id="2-不能继承的部分"><a href="#2-不能继承的部分" class="headerlink" title="2. 不能继承的部分"></a>2. 不能继承的部分</h4><p>  构造函数时不能被继承，常见派生类对象时必须调用派生类的构造函数。<br>  析构函数也是不能继承的，然后，在释放对象时，程序将首先调用派生类的析构函数，然后调用基类的析构函数。通常，对于基类，其析构函数设置为虚的。<br>  复制运算符是不能继承的，原因很简单。派生类继承的方法的特征标与基类完全相同，但赋值运算符的特征标随类而异，这是因为它包含一个类型为其参数所属类的形参。  </p>
 <h4 id="3-私有成员和保护成员"><a href="#3-私有成员和保护成员" class="headerlink" title="3.私有成员和保护成员"></a>3.私有成员和保护成员</h4><p>对派生类而言， 保护成员类似于公有成员，但对于外部而言，保护乘员与私有成员类似，派生类可以直接访问基类的保护成员，但只能通过基类的成员函数访问私有成员。因此，将基类成员设置为私有可以提高安全性，而将它们设置为保护成员则可以简化代码的编写，并提高访问速度。  </p>
@@ -259,7 +259,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">double</span> <span class="title">area</span><span class="params">()</span><span class="keyword">const</span></span>= <span class="number">0</span>; <span class="comment">//纯虚方法定义方式</span></span><br></pre></td></tr></table></figure>
 <p>纯虚方法一定要在派生类中被实现。</p>
 <h3 id="c-的代码重用"><a href="#c-的代码重用" class="headerlink" title="c++的代码重用"></a>c++的代码重用</h3><p>&ensp;&ensp;&ensp;&ensp;c++提供几种重用代码的手段。公有继承能够建立is-a关系，这样派生类可以重用基类的代码。私有继承和保护继承页使得能够重用基类的代码，但是建立的是has-a关系。使用私有继承时，基类的公有成员和保护成员将成为派生类的私有成员；使用保护继承时，基类的公有成员和保护成员将成为派生类的保护乘员。无论使用哪种继承，基类的公有接口都将成为派生类的内部接口。<br>&ensp;&ensp;&ensp;&ensp;还可以通过开发包含对象成员的类来重用类代码，这种方法被称为包含、层次化或组合，它建立的也是has-a关系。与私有继承和保护继承相比，包含更容易实现和使用，所以通常优先采用这种方式。然而私有继承和保护继承比包含有一些不同的功能，例如，继承允许派生类访问基类的保护成员，还允许派生类重新定义从基类那里继承的虚函数。因为包含不是继承，所以通过包含来重用类代码时，不能使用这些功能。<br>&ensp;&ensp;&ensp;&ensp;多重继承（MI）能够在类设计中重用多个类的代码。私有MI和保护MI建立has-a关系，而公有MI建立is-a关系。MI会带来一些问题，即多次定义同一个名称，继承多个基类对象。可以使用类限定符来解决名称二义性问题，使用虚基类来避免继承多个基类对象的问题。但使用虚基类后，就需要为编写构造函数初始化列表以及解决二义性问题引入新的规则。<br>&ensp;&ensp;&ensp;&ensp;类模板使得能够创建通用的类设计，其中类型有类型参数表示。典型的类模板如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tc</span>&#123;</span></span><br><span class="line">    T v;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        Tc(<span class="keyword">const</span> T &amp;val):v(val)&#123;&#125;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tc</span>&#123;</span></span><br><span class="line">    T v;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="built_in">Tc</span>(<span class="keyword">const</span> T &amp;val):<span class="built_in">v</span>(val)&#123;&#125;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中T是类型参数，用作以后将指定的实际类型的占位符。<br>关于模板类有许多需要注意的地方，可以去查阅书第十四章相关部分。</p>
 
     </div>

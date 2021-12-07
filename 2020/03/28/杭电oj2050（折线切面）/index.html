@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/16.ico">
@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/03/28/UPKCGZaDgOeyjzE.png">
 <meta property="article:published_time" content="2020-03-28T13:03:27.000Z">
-<meta property="article:modified_time" content="2020-04-03T13:23:14.497Z">
+<meta property="article:modified_time" content="2020-04-03T13:23:14.000Z">
 <meta property="article:author" content="zero">
 <meta property="article:tag" content="杭电oj">
 <meta name="twitter:card" content="summary">
@@ -250,14 +250,11 @@
       
         <hr>
 <h3 id="杭电oj2050"><a href="#杭电oj2050" class="headerlink" title="杭电oj2050"></a>杭电oj2050</h3><p>hdu oj 第2050 题<br><img src="https://i.loli.net/2020/03/28/UPKCGZaDgOeyjzE.png" alt="QQ图片20200325223723.png"> </p>
-<a id="more"></a>
-
+<span id="more"></span>
 <p>首先我们分析n条直线最多能将分几个平面，容易知道1条直线可分两个平面，两条直线分出四个平面，不难看出。每次多n个交点，就多n+1个平面。假设现在已经有n-1条线，而且分出的平面数最大，那么第n条线最多产生n-1个交点，也就是增加n个平面。那么可以知道，n条直线最多平面数：1+1+2+3·····+n=(n^2+n+2)/2 </p>
 <p>接下来我们再看看，每次增加两条平行直线。假设前面已经有2(n-1)条直线，我现在再增加第一对平行线，则一条线增加2(n-1)+1个平面,所以一对线是增加4n-2个平面，那么n次添加平行线平面数为：1+2+6+····+(4n-2)=2n^2+1    </p>
 <p>最后我们让每次添加进来的平行线相交，那么就会少产生一个面，所以最后n条折线最多产生的平面为：2n^2+1-n；</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> c;</span><br><span class="line">   <span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line">   <span class="keyword">int</span> n;</span><br><span class="line">   <span class="keyword">while</span>(c--)&#123;</span><br><span class="line">      <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">      <span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>*n*n-n+<span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> c;</span><br><span class="line">   cin&gt;&gt;c;</span><br><span class="line">   <span class="keyword">int</span> n;</span><br><span class="line">   <span class="keyword">while</span>(c--)&#123;</span><br><span class="line">      cin&gt;&gt;n;</span><br><span class="line">      cout&lt;&lt;<span class="number">2</span>*n*n-n+<span class="number">1</span>&lt;&lt;endl;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 

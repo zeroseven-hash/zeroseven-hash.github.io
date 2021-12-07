@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/32.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/16.ico">
@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/03/22/h8FEk6Tfmoin34r.png">
 <meta property="article:published_time" content="2020-03-22T15:28:25.000Z">
-<meta property="article:modified_time" content="2020-04-03T13:21:04.733Z">
+<meta property="article:modified_time" content="2020-04-03T13:21:04.000Z">
 <meta property="article:author" content="zero">
 <meta property="article:tag" content="杭电oj">
 <meta name="twitter:card" content="summary">
@@ -250,7 +250,7 @@
       
         <hr>
 <h3 id="杭电oj2035"><a href="#杭电oj2035" class="headerlink" title="杭电oj2035"></a>杭电oj2035</h3><p>hdu oj 第2035 题<br><img src="https://i.loli.net/2020/03/22/h8FEk6Tfmoin34r.png" alt="QQ图片20200322224249.png"> </p>
-<a id="more"></a>
+<span id="more"></span>
 <p> 此题很容易想到用cmath中的pow函数，但是当数据过大时是计算不出来的。所以要将数字变小，这里每次取a的最后三位，再乘以a，再取最后三位，如此循环。最后剩下的三位数值是不会变的。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;a,&amp;b)!=EOF)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a==<span class="number">0</span>&amp;&amp;b==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp=a%<span class="number">1000</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;b;i++)&#123;</span><br><span class="line">            temp=(temp*a)%<span class="number">1000</span>; <span class="comment">//模1000即取后三位</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,temp);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
     </div>
