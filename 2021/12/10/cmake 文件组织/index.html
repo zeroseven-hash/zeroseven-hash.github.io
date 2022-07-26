@@ -20,18 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Cmake 文件组织在cmake中，添加源文件后，如果用vs编译，打开工程，文件内容bu’hui">
+  <meta name="description" content="Cmake 文件组织在cmake中，添加源文件后，如果用vs编译，打开工程，文件会比较乱全都摆在一起，这是需要使用souce_group()将文件分组，下面是代码示例： 123456789foreach(FILE $&amp;#123;all_files&amp;#125;)  #convert source file to absolute  get_filename_component(ABSOLUTE_PA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cmake 项目组织">
 <meta property="og:url" content="http://yoursite.com/2021/12/10/cmake%20%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87/index.html">
 <meta property="og:site_name" content="ZERO">
-<meta property="og:description" content="Cmake 文件组织在cmake中，添加源文件后，如果用vs编译，打开工程，文件内容bu’hui">
+<meta property="og:description" content="Cmake 文件组织在cmake中，添加源文件后，如果用vs编译，打开工程，文件会比较乱全都摆在一起，这是需要使用souce_group()将文件分组，下面是代码示例： 123456789foreach(FILE $&amp;#123;all_files&amp;#125;)  #convert source file to absolute  get_filename_component(ABSOLUTE_PA">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2021/12/10/cmake%20%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87/images/xiangmuzuzhi.png">
+<meta property="og:image" content="http://yoursite.com/2021/12/10/cmake%20%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87/images/%E5%88%86%E7%BB%84.png">
 <meta property="article:published_time" content="2021-12-10T04:13:23.000Z">
-<meta property="article:modified_time" content="2021-12-10T04:18:13.448Z">
+<meta property="article:modified_time" content="2021-12-10T04:33:30.000Z">
 <meta property="article:author" content="zero">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2021/12/10/cmake%20%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87/images/xiangmuzuzhi.png">
 
 <link rel="canonical" href="http://yoursite.com/2021/12/10/cmake%20%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87/">
 
@@ -213,7 +216,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-12-10 12:13:23 / 修改时间：12:18:13" itemprop="dateCreated datePublished" datetime="2021-12-10T12:13:23+08:00">2021-12-10</time>
+              <time title="创建时间：2021-12-10 12:13:23 / 修改时间：12:33:30" itemprop="dateCreated datePublished" datetime="2021-12-10T12:13:23+08:00">2021-12-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +243,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Cmake-文件组织"><a href="#Cmake-文件组织" class="headerlink" title="Cmake 文件组织"></a>Cmake 文件组织</h1><p>在cmake中，添加源文件后，如果用vs编译，打开工程，文件内容bu’hui</p>
+        <h1 id="Cmake-文件组织"><a href="#Cmake-文件组织" class="headerlink" title="Cmake 文件组织"></a>Cmake 文件组织</h1><p>在cmake中，添加源文件后，如果用vs编译，打开工程，文件会比较乱全都摆在一起，这是需要使用souce_group()将文件分组，下面是代码示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span>(<span class="keyword">FILE</span> <span class="variable">$&#123;all_files&#125;</span>)</span><br><span class="line">  <span class="comment">#convert source file to absolute</span></span><br><span class="line">  <span class="keyword">get_filename_component</span>(ABSOLUTE_PATH <span class="string">&quot;$&#123;FILE&#125;&quot;</span> ABSOLUTE)</span><br><span class="line">  <span class="comment"># Get the directory of the absolute source file</span></span><br><span class="line">  <span class="keyword">get_filename_component</span>(PARENT_DIR <span class="string">&quot;$&#123;ABSOLUTE_PATH&#125;&quot;</span> DIRECTORY)</span><br><span class="line">  <span class="comment"># Remove common directory prefix to make the group</span></span><br><span class="line">  <span class="keyword">string</span>(REPLACE <span class="string">&quot;$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;&quot;</span> <span class="string">&quot;&quot;</span> GROUP <span class="string">&quot;$&#123;PARENT_DIR&#125;&quot;</span>)</span><br><span class="line">  <span class="keyword">source_group</span>(<span class="string">&quot;$&#123;GROUP&#125;&quot;</span> FILES <span class="string">&quot;$&#123;FILE&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br></pre></td></tr></table></figure>
+<p>这段代码将项目源码按照原有的文件夹分类，效果如下图所示<img src="images/xiangmuzuzhi.png" alt="文件组织图片"></p>
+<p>此外还可以将cmake项目分组，如外部依赖分到“dependencies”下。<br>首先需要使用命令</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set_property</span>(GLOBAL PROPERTY USE_FOLDERS <span class="keyword">ON</span>)</span><br></pre></td></tr></table></figure>
+<p>开启folder功能，然后将特定子项目分组</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(<span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/MeshMatching/extern/ANN)</span><br><span class="line"><span class="keyword">set_property</span>(<span class="keyword">TARGET</span> ANN PROPERTY FOLDER <span class="string">&quot;dependencies&quot;</span>)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/Simplification)</span><br><span class="line"><span class="keyword">set_property</span>(<span class="keyword">TARGET</span> complex_simplification PROPERTY FOLDER <span class="string">&quot;dependencies&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>结果如下图所示：<br><img src="images/%E5%88%86%E7%BB%84.png" alt="文件组织图片"></p>
 
     </div>
 
@@ -402,7 +412,7 @@
 <div class="copyright">
   
   &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
